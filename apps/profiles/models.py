@@ -21,7 +21,7 @@ class Profile(TimeStampedUUIDModel):
     aadhar = models.CharField(max_length=255,null=True,blank=True)
     profile_image = models.ImageField(upload_to='profile_images',null=True,blank=True)
     gender = models.CharField(choices=Gender.choices,default=Gender.OTHER,max_length=20)
-    country = CountryField(default='India',null=False,blank=False)
+    country = CountryField(default='IND',null=False,blank=False)
     city = models.CharField(max_length=255,null=True,blank=True)
     is_buyer = models.BooleanField(default=False,verbose_name=_('Buyer'),help_text=_('Are Looking for Buy a property'))
     is_seller = models.BooleanField(default=False,verbose_name=_('Seller'),help_text=_('Are Looking to Sell a property'))
