@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin
 from uuid import uuid4
 from django.utils.translation import gettext_lazy as _
 import datetime
+from django.conf import settings
+from rest_framework.authtoken.models import Token   
 
 class CustomUser(AbstractBaseUser,PermissionsMixin):
     pkid=models.BigAutoField(primary_key=True,editable=False)
@@ -35,3 +37,7 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     def get_short_name(self):
         return f'{self.email}'
     
+
+# class MultiToken(Token):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='auth_tokens',
+#             on_delete=models.CASCADE, verbose_name=_("Userss"))

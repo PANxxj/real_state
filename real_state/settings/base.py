@@ -4,24 +4,24 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-env = environ.Env(
-    DEBUG=(bool,False)
-)
+# env = environ.Env(
+#     DEBUG=(bool,False)
+# )
 
-environ.Env.read_env(BASE_DIR/".env")
+# environ.Env.read_env(BASE_DIR/".env")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-#oj(1a@tv7#g!+r0m((s55#b5o=d9!l)i^jqg7j$$$qew5q!kw'
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = 'django-insecure-#oj(1a@tv7#g!+r0m((s55#b5o=d9!l)i^jqg7j$$$qew5q!kw'
+# SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = env("DEBUG")
+DEBUG = True
+# DEBUG = env("DEBUG")
 
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -43,6 +43,9 @@ THIRD_PARTY_APPS = [
     "django_filters",
     "django_countries",
     "phonenumber_field",
+    "djoser",
+    "rest_framework_simplejwt",
+    'rest_framework.authtoken'
     
 ]
 
@@ -141,6 +144,49 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+REST_FRAMEWORK={
+    "DEFAULT_AUTHENTICATION_CLASSES":(
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+    # "DEFAULT_AUTHENTICATION_CLASSES":(
+    #     "apps.users.authenticaion.MultiTokenAuthentication",
+    # ),
+}
+
+from datetime import timedelta
+SIMPLE_JWT = {
+    # "AUTH_HEADER_TYPES":(
+    #     "Bearer",
+    #     'JWT',
+    # ),
+    # 'ACCESS_TOKEN_LIFETIME':timedelta(minutes=120),
+    # 'REFRESH_TOKEN_LIFETIME':timedelta(days=1),
+    # 'SIGNING_KEY':'SIGNING_KEY',
+    # 'AUTH_HEADER_NAME':"HTTP_AUTHORIZATION",
+    # 'AUTH_TOKEN_CLASSES':("rest_framework_simplejwt.tokens.AccessToken",),
+}
+
+# DJOSER={
+#     "LOGIN_FIELD":'email',
+#     'USER_CREATE_PASSWORD_RETYPE':True,
+#     'EMAIL_CHANGED_EMAIL_CONFIRMATION':True,
+#     'PASSWORD_CHANGED_EMAIL_CONFIRMATION':True,
+#     'SEND_CONFIRMATION_EMAIL':True,
+#     'PASSWORD_RESET_CONFIRM_URL':'password/reset/confirm/{uid}/{token}',
+#     'EMAIL_RESET_CONFIRM_URL':'email/reset/confirm/{uid}/{token}',
+#     'SET_PASSWORD_RETYPE':True,
+#     'PASSWORD_RESET_CONFIRM_RETYPE':True,
+#     'ACTIVATION_URL':'active/{uid}/{token}',
+#     'SEND_ACTIVATION_EMAIL':True,
+#     'SERIALIZERS':{
+#         'user_create':'appps.users.serializers.CustomUserCreationSerializer',
+#         'user':'appps.users.serializers.CustomUserSerializer',
+#         'current_user':'appps.users.serializers.CustomUserSerializer',
+#         'user_delete':'djoser.serializers.UserDeleteSerializer',
+
+#     }
+    
+# }
 import logging
 import logging.config
 
