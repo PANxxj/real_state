@@ -7,6 +7,7 @@ import datetime
 from django.conf import settings
 from rest_framework.authtoken.models import Token   
 
+
 class CustomUser(AbstractBaseUser,PermissionsMixin):
     pkid=models.BigAutoField(primary_key=True,editable=False)
     id = models.UUIDField(default=uuid4,editable=False,unique=True)
